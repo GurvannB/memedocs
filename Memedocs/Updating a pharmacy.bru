@@ -1,0 +1,22 @@
+meta {
+  name: Updating a pharmacy
+  type: http
+  seq: 4
+}
+
+patch {
+  url: http://localhost:8080/api/pharmacies/786c89d4-555a-4fa9-ad21-c3ab9fefd7e0
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "address": {
+      "number": 27,
+      "street": "Nouvelle Pl. Rihour",
+      "city": "Villeneuve d'Ascq",
+      "postalCode": 59250
+    }
+  }
+}

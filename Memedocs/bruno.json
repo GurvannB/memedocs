@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Memedocs",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

@@ -1,0 +1,24 @@
+meta {
+  name: Create a pharmacy
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/api/pharmacies
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Pharmacie Place Rihour",
+    "siret": "11111111111111",
+    "address": {
+      "number": 26,
+      "street": "Pl. Rihour",
+      "city": "Lille",
+      "postalCode": 59800
+    }
+  }
+}
