@@ -1,10 +1,14 @@
 package fr.epsi.entities;
 
+import fr.epsi.requests.PharmacyRequest;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,5 +29,17 @@ public class Pharmacy {
     @Column(nullable = false)
     private String name;
 
-//    private Address address;
+    @Column(nullable = false)
+    private String siret;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Address address;
+
+    public static Pharmacy from(PharmacyRequest request) {
+        return Pharmacy.builder()
+                .name(request.getName())
+                .siret(request.getSiret())
+                .address(Address.from(request.getAddress()))
+                .build();
+    }
 }
