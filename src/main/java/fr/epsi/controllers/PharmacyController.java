@@ -2,13 +2,13 @@ package fr.epsi.controllers;
 
 import fr.epsi.dtos.PharmacyDto;
 import fr.epsi.entities.Pharmacy;
+import fr.epsi.requests.MedicineInventoryEntryRequest;
 import fr.epsi.requests.PharmacyPatchRequest;
 import fr.epsi.requests.PharmacyRequest;
 import fr.epsi.services.PharmacyService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -60,4 +60,15 @@ public class PharmacyController {
     public void deletePharmacy(@PathVariable UUID pharmacyId) {
         pharmacyService.delete(pharmacyId);
     }
+
+    @PostMapping("/{pharmacyId}/inventory")
+    @ResponseStatus(HttpStatus.CREATED)
+    public PharmacyDto addToInventory(@PathVariable UUID pharmacyId, @RequestBody MedicineInventoryEntryRequest request) {
+        Pharmacy pharmacy = pharmacyService.addToInventory(pharmacyId, request);
+        return PharmacyDto.from(pharmacy);
+    }
+
+//    @PutMapping("/{pharmacyId}/inventory/{medicineId}")
+//
+//    @DeleteMapping("/{pharmacyId}/inventory/{medicineId}")
 }

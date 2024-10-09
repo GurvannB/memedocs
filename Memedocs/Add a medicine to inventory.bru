@@ -1,0 +1,19 @@
+meta {
+  name: Add a medicine to inventory
+  type: http
+  seq: 6
+}
+
+post {
+  url: http://localhost:8080/api/pharmacies/{{pharmacyId}}/inventory
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "medicineId": null,
+    "label": "Doliprane",
+    "quantity": 7
+  }
+}
