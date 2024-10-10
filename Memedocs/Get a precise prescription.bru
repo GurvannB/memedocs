@@ -1,0 +1,11 @@
+meta {
+  name: Get a precise prescription
+  type: http
+  seq: 11
+}
+
+get {
+  url: http://localhost:8080/api/prescriptions/{{prescriptionId}}
+  body: none
+  auth: none
+}

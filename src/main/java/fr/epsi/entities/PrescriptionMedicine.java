@@ -1,14 +1,16 @@
 package fr.epsi.entities;
 
-import fr.epsi.requests.MedicineInventoryEntryRequest;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,16 +21,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class MedicineInventoryEntry {
-    @EmbeddedId
-    private MedicineInventoryEntryKey key;
+public class PrescriptionMedicine {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    @MapsId("pharmacyId")
     @ManyToOne
-    private Pharmacy pharmacy;
-
-    @MapsId("medicineId")
-    @OneToOne(fetch = FetchType.EAGER)
     private Medicine medicine;
 
     @Column(nullable = false)

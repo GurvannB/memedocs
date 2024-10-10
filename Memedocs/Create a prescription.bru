@@ -1,0 +1,25 @@
+meta {
+  name: Create a prescription
+  type: http
+  seq: 10
+}
+
+post {
+  url: http://localhost:8080/api/prescriptions
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "pharmacyId": "{{pharmacyId}}",
+    "medicines": [
+      "{{medicineId}}"
+    ],
+    "patient": "Gurvann"
+  }
+}
+
+vars:post-response {
+  prescriptionId: res.body.id
+}

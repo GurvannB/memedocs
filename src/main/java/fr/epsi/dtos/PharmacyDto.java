@@ -29,4 +29,10 @@ public class PharmacyDto {
                 .inventory(pharmacy.getInventory() != null ? pharmacy.getInventory().stream().map(MedicineInventoryEntryDto::from).toList() : List.of())
                 .build();
     }
+
+    public static PharmacyDto lightFrom(Pharmacy pharmacy) {
+        PharmacyDto pharmacyDto = PharmacyDto.from(pharmacy);
+        pharmacyDto.setInventory(null);
+        return pharmacyDto;
+    }
 }
