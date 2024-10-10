@@ -16,9 +16,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PrescriptionRequest {
-    @NotNull
-    private UUID pharmacyId;
-
     @NotEmpty
     private List<@Valid PrescriptionMedicineRequest> medicines;
 

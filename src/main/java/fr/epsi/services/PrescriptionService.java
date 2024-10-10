@@ -34,7 +34,7 @@ public class PrescriptionService {
 
     public Prescription create(PrescriptionRequest request) {
         Prescription prescription = Prescription.builder()
-                .pharmacy(pharmacyRepository.findById(request.getPharmacyId()).orElseThrow(PharmacyNotFoundException::new))
+                .pharmacy(null)
                 .medicines(request.getMedicines().stream()
                         .map((medicineRequest) -> {
                             Medicine medicine = medicineRepository.findById(medicineRequest.getMedicineId()).orElseThrow(MedicineNotFoundException::new);
