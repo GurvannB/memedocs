@@ -1,0 +1,11 @@
+meta {
+  name: Delete a medicine from inventory
+  type: http
+  seq: 8
+}
+
+delete {
+  url: http://localhost:8080/api/pharmacies/{{pharmacyId}}/inventory/{{medicineId}}
+  body: none
+  auth: none
+}

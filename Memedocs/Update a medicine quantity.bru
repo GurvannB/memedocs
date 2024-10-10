@@ -1,0 +1,17 @@
+meta {
+  name: Update a medicine quantity
+  type: http
+  seq: 7
+}
+
+put {
+  url: http://localhost:8080/api/pharmacies/{{pharmacyId}}/inventory/{{medicineId}}
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "quantity": 2
+  }
+}

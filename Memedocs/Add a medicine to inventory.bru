@@ -12,8 +12,12 @@ post {
 
 body:json {
   {
-    "medicineId": null,
+    "medicineId": "",
     "label": "Doliprane",
-    "quantity": 7
+    "quantity": 12
   }
+}
+
+vars:post-response {
+  medicineId: res.body.inventory[0].medicine.id
 }

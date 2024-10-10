@@ -5,10 +5,12 @@ import fr.epsi.entities.Medicine;
 import fr.epsi.entities.MedicineInventoryEntry;
 import fr.epsi.entities.MedicineInventoryEntryKey;
 import fr.epsi.entities.Pharmacy;
+import fr.epsi.exceptions.pharmacies.MedicineInventoryEntryNotFoundException;
 import fr.epsi.exceptions.pharmacies.PharmacyNotFoundException;
 import fr.epsi.repositories.MedicineInventoryEntryRepository;
 import fr.epsi.repositories.MedicineRepository;
 import fr.epsi.repositories.PharmacyRepository;
+import fr.epsi.requests.MedicineInventoryEntryPutRequest;
 import fr.epsi.requests.MedicineInventoryEntryRequest;
 import fr.epsi.requests.PharmacyPatchRequest;
 import fr.epsi.requests.PharmacyRequest;
@@ -82,5 +84,17 @@ public class PharmacyService {
         }
         medicineInventoryEntryRepository.save(medicineInventoryEntry);
         return pharmacyRepository.findById(pharmacyId).orElseThrow(PharmacyNotFoundException::new);
+    }
+
+    public Pharmacy updateInventoryQuantity(UUID pharmacyId, UUID medicineId, MedicineInventoryEntryPutRequest request) {
+        MedicineInventoryEntry entry = medicineInventoryEntryRepository.findByKey_PharmacyIdAndKey_MedicineId(pharmacyId, medicineId).orElseThrow(MedicineInventoryEntryNotFoundException::new);
+        entry.setQuantity(request.getQuantity());
+        medicineInventoryEntryRepository.save(entry);
+        return pharmacyRepository.findById(pharmacyId).orElseThrow(PharmacyNotFoundException::new);
+    }
+
+    public void deleteInventoryEntry(UUID pharmacyId, UUID medicineId) {
+        MedicineInventoryEntry entry = medicineInventoryEntryRepository.findByKey_PharmacyIdAndKey_MedicineId(pharmacyId, medicineId).orElseThrow(MedicineInventoryEntryNotFoundException::new);
+        medicineInventoryEntryRepository.deleteById(entry.getKey());
     }
 }

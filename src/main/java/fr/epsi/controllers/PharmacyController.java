@@ -2,6 +2,7 @@ package fr.epsi.controllers;
 
 import fr.epsi.dtos.PharmacyDto;
 import fr.epsi.entities.Pharmacy;
+import fr.epsi.requests.MedicineInventoryEntryPutRequest;
 import fr.epsi.requests.MedicineInventoryEntryRequest;
 import fr.epsi.requests.PharmacyPatchRequest;
 import fr.epsi.requests.PharmacyRequest;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -63,12 +65,21 @@ public class PharmacyController {
 
     @PostMapping("/{pharmacyId}/inventory")
     @ResponseStatus(HttpStatus.CREATED)
-    public PharmacyDto addToInventory(@PathVariable UUID pharmacyId, @RequestBody MedicineInventoryEntryRequest request) {
+    public PharmacyDto addToInventory(@PathVariable UUID pharmacyId, @Valid @RequestBody MedicineInventoryEntryRequest request) {
         Pharmacy pharmacy = pharmacyService.addToInventory(pharmacyId, request);
         return PharmacyDto.from(pharmacy);
     }
 
-//    @PutMapping("/{pharmacyId}/inventory/{medicineId}")
-//
-//    @DeleteMapping("/{pharmacyId}/inventory/{medicineId}")
+    @PutMapping("/{pharmacyId}/inventory/{medicineId}")
+    @ResponseStatus(HttpStatus.OK)
+    public PharmacyDto updateInventoryQuantity(@PathVariable UUID pharmacyId, @PathVariable UUID medicineId, @Valid @RequestBody MedicineInventoryEntryPutRequest request) {
+        Pharmacy pharmacy = pharmacyService.updateInventoryQuantity(pharmacyId, medicineId, request);
+        return PharmacyDto.from(pharmacy);
+    }
+
+    @DeleteMapping("/{pharmacyId}/inventory/{medicineId}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteInventoryEntry(@PathVariable UUID pharmacyId, @PathVariable UUID medicineId) {
+        pharmacyService.deleteInventoryEntry(pharmacyId, medicineId);
+    }
 }
