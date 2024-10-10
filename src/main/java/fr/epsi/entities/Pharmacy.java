@@ -38,10 +38,10 @@ public class Pharmacy {
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pharmacy", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pharmacy")
     private List<MedicineInventoryEntry> inventory;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pharmacy", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pharmacy")
     private List<Prescription> prescriptions;
 
     public static Pharmacy from(PharmacyRequest request) {

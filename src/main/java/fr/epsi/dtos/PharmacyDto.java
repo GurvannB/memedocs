@@ -33,8 +33,11 @@ public class PharmacyDto {
     }
 
     public static PharmacyDto lightFrom(Pharmacy pharmacy) {
-        PharmacyDto pharmacyDto = PharmacyDto.from(pharmacy);
-        pharmacyDto.setInventory(null);
-        return pharmacyDto;
+        return PharmacyDto.builder()
+                .id(pharmacy.getId())
+                .name(pharmacy.getName())
+                .siret(pharmacy.getSiret())
+                .address(AddressDto.from(pharmacy.getAddress()))
+                .build();
     }
 }

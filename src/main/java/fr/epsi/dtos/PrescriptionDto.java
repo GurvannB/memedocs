@@ -30,8 +30,10 @@ public class PrescriptionDto {
     }
 
     public static PrescriptionDto lightFrom(Prescription prescription) {
-        PrescriptionDto prescriptionDto = PrescriptionDto.from(prescription);
-        prescriptionDto.setPharmacy(null);
-        return prescriptionDto;
+        return PrescriptionDto.builder()
+                .id(prescription.getId())
+                .medicines(prescription.getMedicines() != null ? prescription.getMedicines().stream().map(PrescriptionMedicineDto::from).toList() : List.of())
+                .patient(prescription.getPatient())
+                .build();
     }
 }
