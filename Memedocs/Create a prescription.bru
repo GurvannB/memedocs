@@ -12,9 +12,11 @@ post {
 
 body:json {
   {
-    "pharmacyId": "{{pharmacyId}}",
     "medicines": [
-      "{{medicineId}}"
+      {
+        "medicineId": "{{medicineId}}",
+        "quantity": 2
+      }
     ],
     "patient": "Gurvann"
   }

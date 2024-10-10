@@ -44,4 +44,12 @@ public class PrescriptionController {
         Prescription prescription = prescriptionService.create(request);
         return PrescriptionDto.from(prescription);
     }
+
+    @PostMapping("/{prescriptionId}/affect/{pharmacyId}")
+    @ResponseStatus(HttpStatus.OK)
+    public PrescriptionDto affectPrescription(@PathVariable UUID prescriptionId, @PathVariable UUID pharmacyId) {
+        Prescription prescription = prescriptionService.affect(prescriptionId, pharmacyId);
+        return PrescriptionDto.from(prescription);
+    }
+
 }

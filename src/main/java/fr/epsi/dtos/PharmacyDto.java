@@ -19,6 +19,7 @@ public class PharmacyDto {
     private String siret;
     private AddressDto address;
     private List<MedicineInventoryEntryDto> inventory;
+    private List<PrescriptionDto> prescriptions;
 
     public static PharmacyDto from(Pharmacy pharmacy) {
         return PharmacyDto.builder()
@@ -27,6 +28,7 @@ public class PharmacyDto {
                 .siret(pharmacy.getSiret())
                 .address(AddressDto.from(pharmacy.getAddress()))
                 .inventory(pharmacy.getInventory() != null ? pharmacy.getInventory().stream().map(MedicineInventoryEntryDto::from).toList() : List.of())
+                .prescriptions(pharmacy.getPrescriptions() != null ? pharmacy.getPrescriptions().stream().map(PrescriptionDto::lightFrom).toList() : List.of())
                 .build();
     }
 

@@ -1,0 +1,11 @@
+meta {
+  name: Affect a prescription to a pharmacy
+  type: http
+  seq: 12
+}
+
+post {
+  url: http://localhost:8080/api/prescriptions/{{prescriptionId}}/affect/{{pharmacyId}}
+  body: none
+  auth: none
+}

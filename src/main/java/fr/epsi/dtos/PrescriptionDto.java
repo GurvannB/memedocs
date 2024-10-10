@@ -28,4 +28,10 @@ public class PrescriptionDto {
                 .patient(prescription.getPatient())
                 .build();
     }
+
+    public static PrescriptionDto lightFrom(Prescription prescription) {
+        PrescriptionDto prescriptionDto = PrescriptionDto.from(prescription);
+        prescriptionDto.setPharmacy(null);
+        return prescriptionDto;
+    }
 }

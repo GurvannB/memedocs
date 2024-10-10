@@ -1,6 +1,7 @@
 package fr.epsi.services;
 
 import fr.epsi.entities.Medicine;
+import fr.epsi.entities.Pharmacy;
 import fr.epsi.entities.Prescription;
 import fr.epsi.entities.PrescriptionMedicine;
 import fr.epsi.entities.PrescriptionMedicineKey;
@@ -47,6 +48,13 @@ public class PrescriptionService {
                 .patient(request.getPatient())
                 .build();
 
+        return prescriptionRepository.save(prescription);
+    }
+
+    public Prescription affect(UUID prescriptionId, UUID pharmacyId) {
+        Prescription prescription = prescriptionRepository.findById(prescriptionId).orElseThrow(PrescriptionNotFoundException::new);
+        Pharmacy pharmacy = pharmacyRepository.findById(pharmacyId).orElseThrow(PharmacyNotFoundException::new);
+        prescription.setPharmacy(pharmacy);
         return prescriptionRepository.save(prescription);
     }
 }
